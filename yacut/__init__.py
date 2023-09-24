@@ -9,4 +9,4 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 BASE_URL = 'http://localhost/'
 
-from . import api_views, error_handlers, models, views
+from yacut import api_views, error_handlers, models, views

@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import SubmitField, URLField
 from wtforms.validators import DataRequired, Length, Optional
 
+from settings import MAX_LENGTH
+
 
 class URLForm(FlaskForm):
     original_link = URLField(
@@ -11,6 +13,6 @@ class URLForm(FlaskForm):
     )
     custom_id = URLField(
         'Ваш вариант короткой ссылки',
-        validators=[Length(1, 16), Optional()]
+        validators=[Length(1, MAX_LENGTH), Optional()]
     )
     submit = SubmitField('Создать')

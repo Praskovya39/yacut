@@ -2,10 +2,11 @@ from http import HTTPStatus
 
 from flask import jsonify, request
 
-from . import app, db
-from .error_handlers import InvalidAPIUsage, check_inique_short_url
-from .models import URLMap
-from .utils import check_symbols, get_unique_short_url
+from yacut import app, db
+from yacut.error_handlers import InvalidAPIUsage, check_inique_short_url
+from yacut.models import URLMap
+from yacut.utils import check_symbols, get_unique_short_url
+from settings import MAX_LENGTH
 
 
 @app.route('/api/id/', methods=['POST'])
@@ -18,7 +19,7 @@ def add_url():
     if 'custom_id' not in data or data['custom_id'] is None:
         data['custom_id'] = get_unique_short_url()
     custom_id = data['custom_id']
-    if len(custom_id) > 16 or not check_symbols(custom_id):
+    if len(custom_id) > MAX_LENGTH or not check_symbols(custom_id):
         raise InvalidAPIUsage('Указано недопустимое имя для короткой ссылки')
     if check_inique_short_url(custom_id):
         raise InvalidAPIUsage((f'Имя "{custom_id}" уже занято.'))

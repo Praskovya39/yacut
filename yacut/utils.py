@@ -4,12 +4,12 @@ from string import ascii_letters, digits
 SYMBOLS_CHOICE = list(ascii_letters + digits)
 
 
-def get_unique_short_url():
+def get_unique_short_url() -> str:
     short = random.choices(SYMBOLS_CHOICE, k=6)
     return ''.join(short)
 
 
-def check_symbols(custom_id):
+def check_symbols(custom_id: str) -> bool:
     for elem in custom_id:
         if elem not in SYMBOLS_CHOICE:
             return False
