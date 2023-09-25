@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
 from flask import jsonify, render_template
+from typing import Union
 
-from . import app
-from .models import URLMap
+from yacut import app
+from models import URLMap
 
 
 class InvalidAPIUsage(Exception):
@@ -29,7 +30,7 @@ def page_not_found(error: HTTPStatus) -> tuple:
     return render_template('404.html'), HTTPStatus.NOT_FOUND
 
 
-def check_inique_short_url(custom_id: str) -> str:
+def check_inique_short_url(custom_id: str) -> Union[str, None]:
     if URLMap.query.filter_by(short=custom_id).first():
         return custom_id
     return None

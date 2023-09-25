@@ -9,8 +9,8 @@ from yacut.utils import check_symbols, get_unique_short_url
 from settings import MAX_LENGTH
 
 
-@app.route('/api/id/', methods=['POST'])
-def add_url():
+@app.route('/api/id/', methods=('POST'))
+def add_url() -> jsonify:
     data = request.get_json()
     if not data:
         raise InvalidAPIUsage('Отсутствует тело запроса', HTTPStatus.BAD_REQUEST)
@@ -30,8 +30,8 @@ def add_url():
     return jsonify(url.to_dict()), HTTPStatus.CREATED
 
 
-@app.route('/api/id/<string:short_id>/', methods=['GET'])
-def get_original_url(short_id):
+@app.route('/api/id/<string:short_id>/', methods=('GET'))
+def get_original_url(short_id: str) -> jsonify:
     url = URLMap.query.filter_by(short=short_id).first()
     if not url:
         raise InvalidAPIUsage('Указанный id не найден', HTTPStatus.NOT_FOUND)
