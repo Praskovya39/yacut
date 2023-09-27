@@ -4,7 +4,7 @@ from flask import jsonify, render_template
 from typing import Union
 
 from yacut import app
-from models import URLMap
+from yacut.models import URLMap
 
 
 class InvalidAPIUsage(Exception):

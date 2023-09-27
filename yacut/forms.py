@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import SubmitField, URLField
 from wtforms.validators import DataRequired, Length, Optional
 
-from settings import MAX_LENGTH
+from yacut.settings import MAX_LENGTH
 
 
 class URLForm(FlaskForm):

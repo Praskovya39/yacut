@@ -6,10 +6,10 @@ from yacut import app, db
 from yacut.error_handlers import InvalidAPIUsage, check_inique_short_url
 from yacut.models import URLMap
 from yacut.utils import check_symbols, get_unique_short_url
-from settings import MAX_LENGTH
+from yacut.settings import MAX_LENGTH
 
 
-@app.route('/api/id/', methods=('POST'))
+@app.route('/api/id/', methods=('POST',))
 def add_url() -> jsonify:
     data = request.get_json()
     if not data:
@@ -30,7 +30,7 @@ def add_url() -> jsonify:
     return jsonify(url.to_dict()), HTTPStatus.CREATED
 
 
-@app.route('/api/id/<string:short_id>/', methods=('GET'))
+@app.route('/api/id/<string:short_id>/', methods=('GET',))
 def get_original_url(short_id: str) -> jsonify:
     url = URLMap.query.filter_by(short=short_id).first()
     if not url:

@@ -7,7 +7,7 @@ from yacut.models import URLMap
 from yacut.utils import check_symbols, get_unique_short_url
 
 
-@app.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=('GET', 'POST',))
 def main_page_view() -> str:
     form = URLForm()
     if not form.validate_on_submit():
@@ -36,7 +36,7 @@ def main_page_view() -> str:
                            original_link=url.original)
 
 
-@app.route('/<string:short>', methods=('GET'))
+@app.route('/<string:short>', methods=('GET',))
 def redirect_to_url_view(short: str) -> Response:
     url = URLMap.query.filter_by(short=short).first_or_404()
     return redirect(url.original)
