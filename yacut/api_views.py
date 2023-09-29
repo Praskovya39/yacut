@@ -31,7 +31,7 @@ def add_url() -> Tuple[Responce, int]:
 
 
 @app.route('/api/id/<string:short_id>/', methods=('GET',))
-def get_original_url(short_id: str) -> Response:
+def get_original_url(short_id: str) -> Responce:
     url = URLMap.query.filter_by(short=short_id).first()
     if not url:
         raise InvalidAPIUsage('Указанный id не найден', HTTPStatus.NOT_FOUND)
