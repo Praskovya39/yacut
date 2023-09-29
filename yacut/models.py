@@ -3,6 +3,7 @@ from datetime import datetime
 from yacut import db, BASE_URL
 from yacut.settings import MAX_LENGTH, MAX_LINK
 
+
 class URLMap(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     original = db.Column(db.String(MAX_LINK))
