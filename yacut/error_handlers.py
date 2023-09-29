@@ -30,7 +30,7 @@ def page_not_found(error: HTTPStatus) -> tuple:
     return render_template('404.html'), HTTPStatus.NOT_FOUND
 
 
-def check_inique_short_url(custom_id: str) -> Optional[str, None]:
+def check_inique_short_url(custom_id: str) -> Optional[str]:
     if URLMap.query.filter_by(short=custom_id).first():
         return custom_id
     return None

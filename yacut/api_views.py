@@ -1,6 +1,6 @@
 from http import HTTPStatus
 from typing import Tuple
-from flask import jsonify, request, Responce
+from flask import jsonify, request, Response
 
 from yacut import app, db
 from yacut.error_handlers import InvalidAPIUsage, check_inique_short_url
@@ -10,7 +10,7 @@ from yacut.settings import MAX_LENGTH
 
 
 @app.route('/api/id/', methods=('POST',))
-def add_url() -> Tuple[Responce, int]:
+def add_url() -> Tuple[Response, int]:
     data = request.get_json()
     if not data:
         raise InvalidAPIUsage('Отсутствует тело запроса', HTTPStatus.BAD_REQUEST)
@@ -31,7 +31,7 @@ def add_url() -> Tuple[Responce, int]:
 
 
 @app.route('/api/id/<string:short_id>/', methods=('GET',))
-def get_original_url(short_id: str) -> Responce:
+def get_original_url(short_id: str) -> Response:
     url = URLMap.query.filter_by(short=short_id).first()
     if not url:
         raise InvalidAPIUsage('Указанный id не найден', HTTPStatus.NOT_FOUND)

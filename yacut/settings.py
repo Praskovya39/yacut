@@ -8,4 +8,5 @@ class Config(object):
 
 
 MAX_LENGTH = 16
+
 MAX_LINK = 256
